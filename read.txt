@@ -1,0 +1,59 @@
+.container{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.grandparent{
+
+    height: 350px;
+    width: 350px;
+    background-color: red;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+
+
+// js 
+
+var API_key = `e559ffcfc8bcaa8c6fee12e1d700926b`
+
+var searchTemp = () => {
+
+    const city = document.getElementById("search-bar").value;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_key}`
+
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayTemp(data));
+}
+
+var setInnerText = (id , text) => {
+    document.getElementById(id).innerHTML = text;
+}
+
+
+var displayTemp = temp  => {
+    console.log(temp)
+    setInnerText("city" , temp.name);
+    setInnerText("descripition" , temp.weather[0].main);
+    setInnerText("temp" , temp.main.temp);
+    setInnerText("humidity" , temp.main.humidity)
+    setInnerText("wind" , temp.wind.speed)
+   
+    
+}
+
+
+ <h2>Weather in <span id="city">Mumbai</span></h2>
+            <h1><span id="temp">35</span>°C</h1>
+            <div id="icon"></div>
+            <div id="descripition">smoke</div>
+            <div>humidity : <span id="humidity"> 23</span>%</div>
+            <div id="wind">Wind speed: 8km/h</div>
+          </div>
